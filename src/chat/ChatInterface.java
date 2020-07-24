@@ -37,16 +37,24 @@ public class ChatInterface extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        Port = new javax.swing.JTextField();
+        sendPrt = new javax.swing.JTextField();
         set = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         MessageContainer = new javax.swing.JTextArea();
         send = new javax.swing.JButton();
         message = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        rec = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Port");
+        jLabel1.setText("sendPort");
+
+        sendPrt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sendPrtActionPerformed(evt);
+            }
+        });
 
         set.setText("set");
         set.addActionListener(new java.awt.event.ActionListener() {
@@ -55,6 +63,7 @@ public class ChatInterface extends javax.swing.JFrame {
             }
         });
 
+        MessageContainer.setEditable(false);
         MessageContainer.setColumns(20);
         MessageContainer.setRows(5);
         jScrollPane1.setViewportView(MessageContainer);
@@ -66,6 +75,8 @@ public class ChatInterface extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setText("recievePort");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -73,15 +84,22 @@ public class ChatInterface extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(Port, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(79, 79, 79)
-                        .addComponent(set, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 603, Short.MAX_VALUE))
+                        .addComponent(set, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel1))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(5, 5, 5)
+                                .addComponent(jLabel2)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(rec)
+                            .addComponent(sendPrt, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE))))
+                .addGap(46, 46, 46)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 554, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addComponent(message)
@@ -94,42 +112,51 @@ public class ChatInterface extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(53, 53, 53)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
-                            .addComponent(Port, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(34, 34, 34)
-                        .addComponent(set))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(sendPrt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(rec, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(8, 8, 8)
+                        .addComponent(set)
+                        .addGap(28, 28, 28)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(19, 19, 19)
                         .addComponent(message))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(send, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE))))
+                    .addComponent(send, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void setActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setActionPerformed
-       int port = Integer.parseInt(Port.getText());
-        startServer(9896);
+       int port = Integer.parseInt(rec.getText());
+    int client =Integer.parseInt(sendPrt.getText());
+        startServer(port,client);
     }//GEN-LAST:event_setActionPerformed
 
     private void sendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendActionPerformed
         try {
             // TODO add your handling code here:
-            int port =Integer.parseInt(Port.getText());
+            int port =Integer.parseInt(sendPrt.getText());
             String messages = message.getText();
-            startSender(9896,messages);
+//               int dest = Integer.parseInt(dst.getText());
+            startSender(port,messages);
         } catch (UnknownHostException ex) {
             Logger.getLogger(ChatInterface.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_sendActionPerformed
+
+    private void sendPrtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendPrtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_sendPrtActionPerformed
 
     /**
      * @param args the command line arguments
@@ -166,12 +193,12 @@ public class ChatInterface extends javax.swing.JFrame {
         });
     }
     
-  public static void startServer(int portm) {
+  public static void startServer(int port, int dest ) {
     (new Thread() {
         @Override
         public void run() {
             try {
-                DatagramSocket serverSocket = new DatagramSocket(portm);
+                DatagramSocket serverSocket = new DatagramSocket(port);
                 
                 byte[] receiveData = new byte[1024];
                 byte[] sendData  = new byte[1024];
@@ -186,15 +213,15 @@ public class ChatInterface extends javax.swing.JFrame {
                     
                     InetAddress IPAddress = receivePacket.getAddress();
                     
-                    int port = receivePacket.getPort();
+//                    int port = receivePacket.getPort();
                     
                     String capitalizedSentence = sentence.toUpperCase();
                     
                     sendData = capitalizedSentence.getBytes();
-                    
+                    MessageContainer.append(capitalizedSentence +"\n");
                     DatagramPacket sendPacket =
                             new DatagramPacket(sendData, sendData.length, IPAddress,
-                                    6560);
+                                    dest);
                     
                     serverSocket.send(sendPacket); 
                 }   } catch (SocketException ex) {
@@ -214,28 +241,31 @@ public class ChatInterface extends javax.swing.JFrame {
         @Override
         public void run() {
             try { 
-                DatagramSocket clientSocket = new DatagramSocket(6900); 
+                DatagramSocket clientSocket = new DatagramSocket(port); 
                 InetAddress IPAddress = InetAddress.getByName("localhost");
-          
+          int m[]={2423,2567};
   
       byte[] sendData = new byte[1024]; 
       byte[] receiveData = new byte[1024]; 
   String sentence= message;
-      sendData = sentence.getBytes();         
+      sendData = sentence.getBytes();   
+      for(int i=0;i<2;i++){
             DatagramPacket sendPacket = 
-         new DatagramPacket(sendData, sendData.length, IPAddress, port); 
+         new DatagramPacket(sendData, sendData.length, IPAddress, m[i]); 
   
       clientSocket.send(sendPacket); 
   
-      DatagramPacket receivePacket = 
-         new DatagramPacket(receiveData, receiveData.length); 
+//      DatagramPacket receivePacket = 
+//         new DatagramPacket(receiveData, receiveData.length); 
   
-      clientSocket.receive(receivePacket); 
+//      clientSocket.receive(receivePacket); 
+//      
+//      String modifiedSentence = 
+//          new String(receivePacket.getData()); 
   
-      String modifiedSentence = 
-          new String(receivePacket.getData()); 
-  
-      MessageContainer.append(modifiedSentence);
+      
+      
+      }
       clientSocket.close(); 
             } catch (SocketException ex) {
                 Logger.getLogger(Chat.class.getName()).log(Level.SEVERE, null, ex);
@@ -252,11 +282,13 @@ public class ChatInterface extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JTextArea MessageContainer;
-    private javax.swing.JTextField Port;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField message;
+    private javax.swing.JTextField rec;
     private javax.swing.JButton send;
+    private javax.swing.JTextField sendPrt;
     private javax.swing.JButton set;
     // End of variables declaration//GEN-END:variables
 }
