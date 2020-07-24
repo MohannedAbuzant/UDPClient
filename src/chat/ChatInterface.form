@@ -42,7 +42,7 @@
                               <Component id="set" max="32767" attributes="0"/>
                               <Component id="Dest" max="32767" attributes="0"/>
                               <Component id="rec" max="32767" attributes="0"/>
-                              <Component id="sendPrt" pref="141" max="32767" attributes="0"/>
+                              <Component id="sendprt" pref="141" max="32767" attributes="0"/>
                           </Group>
                           <Component id="All" min="-2" max="-2" attributes="0"/>
                           <Component id="First" min="-2" max="-2" attributes="0"/>
@@ -73,7 +73,7 @@
                       <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="sendPrt" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="sendprt" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -110,9 +110,9 @@
         <Property name="text" type="java.lang.String" value="sendPort"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="sendPrt">
+    <Component class="javax.swing.JTextField" name="sendprt">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="sendPrtActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="sendprtActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="set">

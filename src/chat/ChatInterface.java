@@ -39,7 +39,7 @@ public class ChatInterface extends javax.swing.JFrame {
 
         buttonGroup2 = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
-        sendPrt = new javax.swing.JTextField();
+        sendprt = new javax.swing.JTextField();
         set = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         MessageContainer = new javax.swing.JTextArea();
@@ -57,9 +57,9 @@ public class ChatInterface extends javax.swing.JFrame {
 
         jLabel1.setText("sendPort");
 
-        sendPrt.addActionListener(new java.awt.event.ActionListener() {
+        sendprt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sendPrtActionPerformed(evt);
+                sendprtActionPerformed(evt);
             }
         });
 
@@ -119,7 +119,7 @@ public class ChatInterface extends javax.swing.JFrame {
                                 .addComponent(set, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(Dest)
                                 .addComponent(rec)
-                                .addComponent(sendPrt, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE))
+                                .addComponent(sendprt, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE))
                             .addComponent(All)
                             .addComponent(First)
                             .addComponent(Second))
@@ -142,7 +142,7 @@ public class ChatInterface extends javax.swing.JFrame {
                         .addGap(53, 53, 53)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
-                            .addComponent(sendPrt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(sendprt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
@@ -170,8 +170,8 @@ public class ChatInterface extends javax.swing.JFrame {
 
     private void setActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setActionPerformed
        int port = Integer.parseInt(rec.getText());
-    int client =Integer.parseInt(sendPrt.getText());
-     sendPrt.setEnabled(false);
+    int client =Integer.parseInt(sendprt.getText());
+     sendprt.setEnabled(false);
      rec.setEnabled(false);
      Dest.setEnabled(false);
     set.setEnabled(false);
@@ -181,7 +181,7 @@ public class ChatInterface extends javax.swing.JFrame {
     private void sendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendActionPerformed
         try {
             // TODO add your handling code here:
-            int port =Integer.parseInt(sendPrt.getText());
+            int port =Integer.parseInt(sendprt.getText());
             String messages = message.getText();
             String m[]=Dest.getText().split(",");
 //               int dest = Integer.parseInt(dst.getText());
@@ -191,9 +191,9 @@ public class ChatInterface extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_sendActionPerformed
 
-    private void sendPrtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendPrtActionPerformed
+    private void sendprtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendprtActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_sendPrtActionPerformed
+    }//GEN-LAST:event_sendprtActionPerformed
 
     private void FirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FirstActionPerformed
         // TODO add your handling code here:
@@ -255,12 +255,11 @@ public class ChatInterface extends javax.swing.JFrame {
                     
                     InetAddress IPAddress = receivePacket.getAddress();
                     
-//                    int port = receivePacket.getPort();
                     
-                    String capitalizedSentence = sentence.toUpperCase();
+                     
                     
-                    sendData = capitalizedSentence.getBytes();
-                    MessageContainer.append(capitalizedSentence +"\n");
+                    sendData = sentence.getBytes();
+                    MessageContainer.append(sentence +"\n");
                     DatagramPacket sendPacket =
                             new DatagramPacket(sendData, sendData.length, IPAddress,
                                     dest);
@@ -290,6 +289,8 @@ public class ChatInterface extends javax.swing.JFrame {
       byte[] sendData = new byte[1024]; 
       byte[] receiveData = new byte[1024]; 
   String sentence= message;
+   MessageContainer.append("me: "+sentence +"\n");
+   sentence= port+": "+sentence;
       sendData = sentence.getBytes();   
       if(All.isSelected()){
           
@@ -300,16 +301,6 @@ public class ChatInterface extends javax.swing.JFrame {
   
       clientSocket.send(sendPacket); 
   
-//      DatagramPacket receivePacket = 
-//         new DatagramPacket(receiveData, receiveData.length); 
-  
-//      clientSocket.receive(receivePacket); 
-//      
-//      String modifiedSentence = 
-//          new String(receivePacket.getData()); 
-  
-      
-      
       }
       }
       else if(First.isSelected()){
@@ -354,7 +345,7 @@ public class ChatInterface extends javax.swing.JFrame {
     private javax.swing.JTextField message;
     private javax.swing.JTextField rec;
     private javax.swing.JButton send;
-    private javax.swing.JTextField sendPrt;
+    private javax.swing.JTextField sendprt;
     private javax.swing.JButton set;
     // End of variables declaration//GEN-END:variables
 }
