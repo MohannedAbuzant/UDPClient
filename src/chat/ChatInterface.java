@@ -184,8 +184,9 @@ public class ChatInterface extends javax.swing.JFrame {
 
     private void setActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setActionPerformed
        int port = Integer.parseInt(rec.getText());
-    
-    
+    String names[] =Dest.getText().split(",|-");
+      First.setText(names[0]);
+      Second.setText(names[2]);
      rec.setEnabled(false);
      Dest.setEnabled(false);
     set.setEnabled(false);
@@ -199,7 +200,8 @@ public class ChatInterface extends javax.swing.JFrame {
             // TODO add your handling code here:
            
             String messages = message.getText();
-            String m[]=Dest.getText().split(",");
+            String m[]=Dest.getText().split(",|-");
+
             message.setText("");
             startClient(messages,m);
         } catch (UnknownHostException ex) {
@@ -296,10 +298,11 @@ public class ChatInterface extends javax.swing.JFrame {
    MessageContainer.append("me: "+sentence +"\n");// show the message the client send  on his Jtextarea
    sentence= Name.getText()+": "+sentence;// send the message to other clients with his name
       sendData = sentence.getBytes();   // converting the message to bytes
+
       if(All.isSelected()){// if radio button is pressed on All 
           
       
-      for(int i=0;i<2;i++){
+      for(int i=1;i<4;i+=2){
             DatagramPacket sendPacket = 
          new DatagramPacket(sendData, sendData.length, IPAddress, Integer.parseInt(destination[i]));//storing data in datagramPacket object to other clients 
   
@@ -310,13 +313,13 @@ public class ChatInterface extends javax.swing.JFrame {
       else if(First.isSelected()){// if first radio button is pressed
           
             DatagramPacket sendPacket = 
-         new DatagramPacket(sendData, sendData.length, IPAddress, Integer.parseInt(destination[0])); //storing data in datagramPacket object to first client
+         new DatagramPacket(sendData, sendData.length, IPAddress, Integer.parseInt(destination[1])); //storing data in datagramPacket object to first client
   
       clientSocket.send(sendPacket); //send data to other clients
       }
       else{
             DatagramPacket sendPacket = 
-         new DatagramPacket(sendData, sendData.length, IPAddress, Integer.parseInt(destination[1])); //storing data in datagramPacket object to second client 
+         new DatagramPacket(sendData, sendData.length, IPAddress, Integer.parseInt(destination[3])); //storing data in datagramPacket object to second client 
   
       clientSocket.send(sendPacket); //send data to other clients
       }
