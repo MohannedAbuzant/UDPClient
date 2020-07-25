@@ -214,8 +214,8 @@ public class ChatInterface extends javax.swing.JFrame {
             int port =Integer.parseInt(sendprt.getText());
             String messages = message.getText();
             String m[]=Dest.getText().split(",");
-//               int dest = Integer.parseInt(dst.getText());
-            startSender(port,messages,m);
+            message.setText("");
+            startClient(port,messages,m);
         } catch (UnknownHostException ex) {
             Logger.getLogger(ChatInterface.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -306,7 +306,7 @@ public class ChatInterface extends javax.swing.JFrame {
     }).start();
   }
 
-  public static void startSender(int port, String message,String[] destination) throws UnknownHostException{
+  public static void startClient(int port, String message,String[] destination) throws UnknownHostException{
    
     (new Thread() {
         @Override
