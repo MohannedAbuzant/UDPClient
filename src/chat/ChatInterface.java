@@ -52,6 +52,10 @@ public class ChatInterface extends javax.swing.JFrame {
         All = new javax.swing.JRadioButton();
         First = new javax.swing.JRadioButton();
         Second = new javax.swing.JRadioButton();
+        jLabel4 = new javax.swing.JLabel();
+        IP = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        Name = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -101,6 +105,10 @@ public class ChatInterface extends javax.swing.JFrame {
         buttonGroup2.add(Second);
         Second.setText("Second");
 
+        jLabel4.setText("IP address");
+
+        jLabel5.setText("Name");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -110,20 +118,32 @@ public class ChatInterface extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2))
-                        .addGap(9, 9, 9)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(set, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(Dest)
-                                .addComponent(rec)
-                                .addComponent(sendprt, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE))
-                            .addComponent(All)
-                            .addComponent(First)
-                            .addComponent(Second))
-                        .addGap(46, 46, 46)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(200, 200, 200))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel1)
+                                            .addComponent(jLabel3)
+                                            .addComponent(jLabel2)
+                                            .addComponent(jLabel4))
+                                        .addGap(9, 9, 9)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(set, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(Dest)
+                                            .addComponent(rec)
+                                            .addComponent(sendprt, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
+                                            .addComponent(IP)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(34, 34, 34)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(All)
+                                            .addComponent(First)
+                                            .addComponent(Second)))
+                                    .addComponent(Name, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(46, 46, 46)))
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(message)
@@ -138,8 +158,16 @@ public class ChatInterface extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(23, 23, 23)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(53, 53, 53)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(Name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(IP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
                             .addComponent(sendprt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -153,7 +181,7 @@ public class ChatInterface extends javax.swing.JFrame {
                             .addComponent(jLabel3))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(set)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(All)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(First)
@@ -175,6 +203,8 @@ public class ChatInterface extends javax.swing.JFrame {
      rec.setEnabled(false);
      Dest.setEnabled(false);
     set.setEnabled(false);
+    Name.setEnabled(false);
+    IP.setEnabled(false);
         startServer(port,client);
     }//GEN-LAST:event_setActionPerformed
 
@@ -283,14 +313,14 @@ public class ChatInterface extends javax.swing.JFrame {
         public void run() {
             try { 
                 DatagramSocket clientSocket = new DatagramSocket(port); 
-                InetAddress IPAddress = InetAddress.getByName("localhost");
+                InetAddress IPAddress = InetAddress.getByName(IP.getText());
           
   
       byte[] sendData = new byte[1024]; 
       byte[] receiveData = new byte[1024]; 
   String sentence= message;
    MessageContainer.append("me: "+sentence +"\n");
-   sentence= port+": "+sentence;
+   sentence= Name.getText()+"("+port+"): "+sentence;
       sendData = sentence.getBytes();   
       if(All.isSelected()){
           
@@ -335,12 +365,16 @@ public class ChatInterface extends javax.swing.JFrame {
     private static javax.swing.JRadioButton All;
     private javax.swing.JTextField Dest;
     private static javax.swing.JRadioButton First;
+    private static javax.swing.JTextField IP;
     public static javax.swing.JTextArea MessageContainer;
+    private static javax.swing.JTextField Name;
     private static javax.swing.JRadioButton Second;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField message;
     private javax.swing.JTextField rec;
